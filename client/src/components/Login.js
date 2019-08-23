@@ -16,12 +16,15 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:5000/api/login', {
-      username: user.username,
-      password: user.password,
-    })
-    console.log(response);
-    localStorage.setItem('userToken', response.data.payload);
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', {
+        username: user.username,
+        password: user.password,
+      })
+      localStorage.setItem('userToken', response.data.payload);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
